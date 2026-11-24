@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MultiStream Studio — Player & Chat Multi-Plataforma</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- hls.js para streams .m3u8 -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <h1>MultiStream <span>Studio</span></h1>
+    </div>
+
+    <form id="stream-form" class="stream-form" autocomplete="off">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          id="stream-url"
+          placeholder="Cole o link da live ou vídeo (Kick, YouTube, Twitch, .m3u8, .mp4)..."
+          aria-label="URL da live ou vídeo"
+          required
+        />
+        <span id="platform-badge" class="platform-badge neutral">Aguardando link</span>
+      </div>
+
+      <select id="target-screen" aria-label="Selecionar tela de destino"></select>
+
+      <button type="submit" class="btn btn-primary">
+        <span>+ Carregar na Tela</span>
+      </button>
+    </form>
+
+    <div class="global-actions">
+      <button type="button" id="btn-toggle-all-chats" class="btn btn-secondary" title="Fechar ou abrir todos os chats para liberar espaço">
+        Fechar Chats
+      </button>
+      <button type="button" id="btn-mute-all" class="btn btn-secondary" title="Silenciar ou reativar todas as telas">
+        Mutar Tudo
+      </button>
+      <button type="button" id="btn-reset-sizes" class="btn btn-secondary" title="Restaurar proporções padrão das telas e chats">
+        Resetar Tamanhos
+      </button>
+      <button type="button" id="btn-clear-all" class="btn btn-danger" title="Remover todas as transmissões">
+        Limpar
+      </button>
+    </div>
+  </header>
+
+  <nav class="layout-bar" aria-label="Modos de visualização">
+    <div class="layout-group">
+      <span class="bar-label">Layout:</span>
+      <button type="button" class="layout-btn" data-layout="1x1">1x1 Foco</button>
+      <button type="button" class="layout-btn" data-layout="side-by-side">Lado a Lado (2)</button>
+      <button type="button" class="layout-btn active" data-layout="spotlight">Destaque + Laterais</button>
+      <button type="button" class="layout-btn" data-layout="grid-2x2">Grade 2x2</button>
+      <button type="button" class="layout-btn" data-layout="grid-3x2">Grade 3x2</button>
+    </div>
+
+    <div class="layout-group right">
+      <button type="button" id="btn-add-slot" class="btn btn-outline">+ Nova Tela</button>
+      <span id="status-indicator" class="status-text">Salvo automaticamente</span>
+    </div>
+  </nav>
+
+  <main id="stage" class="stage layout-spotlight"></main>
+
+  <!-- APIs oficiais carregadas de forma assíncrona -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
